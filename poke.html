@@ -27,31 +27,58 @@
 
       }
 
+      .main-bg{
+        background-image: url('rickMoty.jpg');
+        background-position: center;
+        background-size: auto;
+        background-repeat: repeat;
+      }
+
       .text-gray{
         color: #838383;
       }
 
+      [data-bs-target="#offcanvasTop"]{
+        position: fixed;
+        bottom: 0px;
+        right: 0px ;
+        border-radius: 0px;
+        border: 1px solid black!important;
+        background: #04b107;
+        z-index: 100;
+      }
+
     </style>
   </head>
-  <body>
-    <h1 class="font-rick-morty">Obtener datos de una API</h1>
-    <div class="table-responsive" id="data-container">
-      <table class="table table-light font-chakra table-striped table-hover">
-        <thead>
-          <tr class="text-center">
-            <th scope="col">name</th>
-            <th scope="col">status</th>
-            <th scope="col">species</th>
-            <th scope="col">gender</th>
-            <th scope="col">origin</th>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-      </table>
-    </div>
+  <body class="main-bg">
+    <h1 class="font-rick-morty text-center text-danger bg-black sticky-top">Obtener datos de una API</h1>
+
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Ver datos</button>
+
+      <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <div class="offcanvas-header py-1 border-bottom">
+          <h3 class="offcanvas-title w-100 text-center font-rick-morty" id="offcanvasTopLabel">RICK AND MORTY</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <table class="table table-light font-chakra table-striped table-hover">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">name</th>
+                <th scope="col">status</th>
+                <th scope="col">species</th>
+                <th scope="col">gender</th>
+                <th scope="col">origin</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+          </table>
+        </div>
+      </div>
 
 
-    <div class="row  px-lg-5  m-0" id="cards-container">
+
+    <div class="row  px-lg-5  m-0 justify-content-center" id="cards-container">
 
 
 

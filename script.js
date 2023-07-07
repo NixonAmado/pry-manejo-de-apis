@@ -1,7 +1,15 @@
+let personajesAleatorios = [];
+let TamañoDePantalla = screen.width > 1400?12:10;
+
+for (let index = 0; index < TamañoDePantalla; index++) {
+  personajesAleatorios.push( Math.floor(Math.random() * 826));
+}
+
 async function fetchData() {
     try {
     //   const response = await fetch('https://api.example.com/data');
-    const response = await fetch('https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8');
+    //ejemplo= 1,344,434,2,3,55,66,12
+    const response = await fetch( `https://rickandmortyapi.com/api/character/${personajesAleatorios.join(",")}`);
     //const response = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=4&lon=72&appid='atmos'");
     
       const data = await response.json();
@@ -18,7 +26,6 @@ async function fetchData() {
     try {
       const tableBody = document.getElementById('table-body');
       const data = await fetchData();
-      console.log(data);
       let fila = data.map((elemento)=>{        
         return `
         <tr class="text-center">
@@ -31,8 +38,6 @@ async function fetchData() {
           `
         });
 
-      console.log(fila);
-      
       tableBody.innerHTML+= fila.join('');
       displayCards();
     } catch (error) {
@@ -46,16 +51,18 @@ async function displayCards(){
       const cardsContainer = document.getElementById('cards-container');
       const data = await fetchData();
       let card = data.map((elemento)=>{
+      let recortarNombre= elemento.name.trim().split(" ");
+      (recortarNombre.length >2)? recortarNombre.pop() : elemento;
       return`      
-      <div class="col-xxl-4 col-lg-6 col-12">
+      <div class="col-xxl-4 col-lg-6 col-9">
         <div class="card mb-3" >
           <div class="row g-0">
             <div class="col-sm-4 d-flex">
-              <img src="${elemento.image} "class="img-fluid card-img" alt="MORTY">
+              <img src="${elemento.image}" class="img-fluid card-img"  alt="${elemento.name} caracter ">
             </div>
-            <div class="col-8 ">
+            <div class="col-sm-8 ">
               <div class="card-body text-light bg-dark rounded-end">
-                <h3 class="card-title fw-bold m-0">${elemento.name} </h3>
+                <h3 class="card-title fw-bold m-0">${recortarNombre.join(' ')}</h3>
                 <ul>
                   <li><h6 class="fw-normal">${elemento.status} </h6></li>
                 </ul>          
